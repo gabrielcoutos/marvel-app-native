@@ -3,6 +3,8 @@ package br.com.couto.marvel.ui.main;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel.setCharacterList(characterList);
+        viewModel.getCharacter();
         setupRecycleView();
     }
 
@@ -43,5 +46,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         binding.recycleCharacter.setLayoutManager(manager);
         binding.recycleCharacter.setAdapter(charactersAdapter);
+        viewModel.setAdapter(charactersAdapter);
     }
 }

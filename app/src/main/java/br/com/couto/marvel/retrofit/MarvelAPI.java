@@ -11,4 +11,7 @@ public interface MarvelAPI {
 
     @GET("characters/{id}"+SUFIX)
     Call<CharacterDTO> getCharacter(@Path("id")Long id);
+
+    @GET("characters"+SUFIX)
+    Call<CharacterDTO> getCharacters();
 }
