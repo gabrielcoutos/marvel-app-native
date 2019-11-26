@@ -13,5 +13,5 @@ public interface MarvelAPI {
     Call<CharacterDTO> getCharacter(@Path("id")Long id);
 
     @GET("characters"+SUFIX)
-    Call<CharacterDTO> getCharacters();
+    Call<CharacterDTO> getCharacters(@Query("offset")Integer offset);
 }

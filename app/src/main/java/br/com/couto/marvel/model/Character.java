@@ -42,4 +42,5 @@ public class Character implements Serializable {
     public void setThumbnail(Thumbnail thumbnail) {
         this.thumbnail = thumbnail;
     }
+
 }

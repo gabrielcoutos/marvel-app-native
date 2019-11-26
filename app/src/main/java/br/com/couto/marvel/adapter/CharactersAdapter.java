@@ -14,6 +14,9 @@ import br.com.couto.marvel.model.Character;
 public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder> {
 
     private final List<Character> characterList;
+    private EndListListener mOnEndListListener;
+
+
 
     public CharactersAdapter(List<Character> characterList) {
         this.characterList = characterList;
@@ -31,13 +34,21 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
         Character character = characterList.get(position);
         holder.binding.setCharacter(character);
-
+        if(position == characterList.size() -1){
+            if(mOnEndListListener!= null) mOnEndListListener.onEndListListener();
+        }
     }
 
     @Override
     public int getItemCount() {
         return characterList.size();
     }
+
+    public void setmOnEndListListener(EndListListener mOnEndListListener) {
+        this.mOnEndListListener = mOnEndListListener;
+    }
+
+
 
     class CharacterViewHolder extends RecyclerView.ViewHolder{
         private CharacterCardBinding binding;

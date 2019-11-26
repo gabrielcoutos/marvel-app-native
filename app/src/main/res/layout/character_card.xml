@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -38,6 +38,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
+                    app:imageUrl="@{character.thumbnail.path+'.'+character.thumbnail.extension}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
