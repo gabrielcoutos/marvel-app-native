@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Marvel</string>
+    <string name="app_name_upper">MARVEL</string>
+    <string name="searcch">Procurar</string>
 </resources>
