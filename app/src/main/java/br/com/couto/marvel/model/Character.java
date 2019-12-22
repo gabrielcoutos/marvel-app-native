@@ -2,11 +2,14 @@ package br.com.couto.marvel.model;
 
 import java.io.Serializable;
 
+import br.com.couto.marvel.model.comics.ComicsDTO;
+
 public class Character implements Serializable {
     private Long id;
     private String name;
     private String description;
     private Thumbnail thumbnail;
+    private ComicsDTO comics;
 
     public Character() {
     }
@@ -43,4 +46,11 @@ public class Character implements Serializable {
         this.thumbnail = thumbnail;
     }
 
+    public ComicsDTO getComics() {
+        return comics;
+    }
+
+    public void setComics(ComicsDTO comics) {
+        this.comics = comics;
+    }
 }

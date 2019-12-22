@@ -1,5 +1,7 @@
 package br.com.couto.marvel.ui.main;
 
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.List;
 
 import br.com.couto.marvel.adapter.CharactersAdapter;
 import br.com.couto.marvel.adapter.EndListListener;
+import br.com.couto.marvel.adapter.OnCharacterClickListener;
 import br.com.couto.marvel.model.Character;
 import br.com.couto.marvel.model.CharacterDTO;
 import br.com.couto.marvel.retrofit.MarvelAPI;
@@ -16,18 +19,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainViewModel  extends ViewModel implements EndListListener {
+public class MainViewModel  extends ViewModel implements EndListListener, OnCharacterClickListener {
     private List<Character> characterList;
     private CharactersAdapter adapter;
     private Integer limit = 20;
     private Integer offset = 0;
+    private MutableLiveData<Character> clickCharacter;
+
 
     public MainViewModel() {
         characterList = new ArrayList<>();
-    }
-
-    public void setCharacterList(List<Character> characters){
-        this.characterList = characters;
+        adapter = new CharactersAdapter(characterList);
+        adapter.setmOnEndListListener(this::onEndListListener);
+        adapter.setmOnCharacterClickListener(this::onCharacterClick);
+        clickCharacter = new MutableLiveData<>();
+        getCharacter();
     }
 
     public void getCharacter(){
@@ -36,11 +42,6 @@ public class MainViewModel  extends ViewModel implements EndListListener {
         Call<CharacterDTO> call = api.getCharacters(offset);
         call.enqueue(callback);
 
-    }
-
-    public void setAdapter(CharactersAdapter adapter) {
-        this.adapter = adapter;
-        adapter.setmOnEndListListener(this);
     }
 
     private Callback<CharacterDTO> callback = new Callback<CharacterDTO>() {
@@ -65,4 +66,20 @@ public class MainViewModel  extends ViewModel implements EndListListener {
     public void onEndListListener() {
         getCharacter();
     }
+
+    public CharactersAdapter getAdapter() {
+        return adapter;
+    }
+
+    @Override
+    public void onCharacterClick(Character character) {
+        clickCharacter.postValue(character);
+
+    }
+
+    public MutableLiveData<Character> getClickCharacter() {
+        return clickCharacter;
+    }
+
+
 }

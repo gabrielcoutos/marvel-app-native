@@ -39,7 +39,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_character"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layoutAnimation = "@anim/layout_anim_fall_down"/>
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

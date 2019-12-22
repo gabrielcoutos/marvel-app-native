@@ -15,6 +15,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
 
     private final List<Character> characterList;
     private EndListListener mOnEndListListener;
+    private OnCharacterClickListener mOnCharacterClickListener;
 
 
 
@@ -34,6 +35,11 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
         Character character = characterList.get(position);
         holder.binding.setCharacter(character);
+        holder.binding.cardViewCharacter.setOnClickListener(view -> {
+            if (mOnCharacterClickListener != null) {
+                mOnCharacterClickListener.onCharacterClick(character);
+            }
+        });
         if(position == characterList.size() -1){
             if(mOnEndListListener!= null) mOnEndListListener.onEndListListener();
         }
@@ -48,7 +54,9 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
         this.mOnEndListListener = mOnEndListListener;
     }
 
-
+    public void setmOnCharacterClickListener(OnCharacterClickListener mOnCharacterClickListener) {
+        this.mOnCharacterClickListener = mOnCharacterClickListener;
+    }
 
     class CharacterViewHolder extends RecyclerView.ViewHolder{
         private CharacterCardBinding binding;
